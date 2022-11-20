@@ -31,7 +31,7 @@ status,
 count(*) as cnt,
 sum(payment_amount) as revenue
 from staging.user_order_log
-where date_time between (current_date::date-7) and (current_date::date-1)
+where date_time between ('{{ds}}'::date-7) and ('{{ds}}'::date-1)
 group by customer_id, item_id, status
 ),
 ids as (
@@ -70,7 +70,7 @@ nc.new_customers_count,
 rc.returning_customers_count,
 rf.refunded_customer_count,
 'weekly' as period_name,
-((current_date::date-7)::varchar(20) || ' - ' || (current_date::date-1)::varchar(20)) as period_id,
+(('{{ds}}'::date-7)::varchar(20) || ' - ' || ('{{ds}}'::date-1)::varchar(20)) as period_id,
 ids.item_id,
 nc.new_customers_revenue,
 rc.returning_customers_revenue,
