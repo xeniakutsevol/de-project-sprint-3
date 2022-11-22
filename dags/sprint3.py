@@ -102,7 +102,7 @@ def upload_data_to_staging(filename, date, pg_table, pg_schema, ti):
 
     # В csv-файлах два лишних столбца - индекс и id, оставлю такое преобразование.
     df = pd.read_csv(local_filename)
-    df=df.drop('id', axis=1) 
+    df = df.drop('id', axis=1) 
     df = df.drop_duplicates(subset=["uniq_id"])
 
     if "status" not in df.columns:
